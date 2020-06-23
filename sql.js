@@ -122,12 +122,23 @@ const bestEvent = country => {
     return countryBestThingCount('event', country);
 };
 
+// Utility function to find number of medalists in argument country by gender
+const countryGenderMedalistsCount = (gender, country) => {
+    if (['Men', 'Women'].includes(gender)) {
+        return `SELECT COUNT( DISTINCT name)
+                FROM GoldMedal
+                WHERE gender = '${gender} AND
+                    country = '${country}';`;
+    }
+    return null;
+};
+
 /*
 Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-
+    return countryGenderMedalistsCount('Men', country);
 };
 
 /*
@@ -135,7 +146,7 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-
+    return countryGenderMedalistsCount('Women', country);
 };
 
 /*
