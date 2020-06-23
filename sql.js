@@ -6,7 +6,11 @@ Returns a SQL query string that will create the Country table with four columns:
 */
 
 const createCountryTable = () => {
-    return;
+    return `CREATE TABLE Country (
+        name TEXT NOT NULL,
+        code TEXT NOT NULL,
+        gdp INTEGER,
+        population INTEGER);`;
 };
 
 /*
@@ -14,7 +18,7 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 */
 
 const createGoldMedalTable = () => {
-    return;
+
 };
 
 /*
@@ -22,7 +26,7 @@ Returns a SQL query string that will find the number o                          
 */
 
 const goldMedalNumber = country => {
-    return;
+
 };
 
 /*
@@ -31,7 +35,7 @@ won the most summer medals, along with the number of medals aliased to 'count'.
 */
 
 const mostSummerWins = country => {
-    return;
+
 };
 
 /*
@@ -40,7 +44,7 @@ won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
 const mostWinterWins = country => {
-    return;
+
 };
 
 /*
@@ -49,7 +53,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestYear = country => {
-    return;
+
 };
 
 /*
@@ -58,7 +62,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestDiscipline = country => {
-    return;
+
 };
 
 /*
@@ -67,7 +71,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-    return;
+
 };
 
 /*
@@ -76,7 +80,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestEvent = country => {
-    return;
+
 };
 
 /*
@@ -84,7 +88,7 @@ Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-    return;
+
 };
 
 /*
@@ -92,7 +96,7 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-    return;
+
 };
 
 /*
@@ -100,7 +104,7 @@ Returns a SQL query string that will find the athlete with the most medals.
 */
 
 const mostMedaledAthlete = country => {
-    return;
+
 };
 
 /*
@@ -109,7 +113,7 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-    return;
+
 };
 
 /*
@@ -120,7 +124,7 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 */
 
 const orderedSports = (country, field, sortAscending) => {
-    return;
+
 };
 
 module.exports = {
