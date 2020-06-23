@@ -73,13 +73,26 @@ const mostWinterWins = country => {
     return mostSeasonWins('Winter', country);
 };
 
+// Utility function to find best thing argument country won the most medals in
+const countryBestThingCount = (bestThing, country) => {
+    if (['year', 'discipline', 'sport', 'event'].includes(bestThing)) {
+        return `SELECT ${bestThing}, COUNT(*) AS count
+                FROM GoldMedal
+                WHERE country = '${country}'
+                GROUP BY year
+                ORDER BY COUNT(*) DESC
+                LIMIT 1;`;
+    }
+    return null;
+};
+
 /*
 Returns a SQL query string that will find the year where the given country
 won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestYear = country => {
-
+    return countryBestThingCount('year', country);
 };
 
 /*
@@ -88,7 +101,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestDiscipline = country => {
-
+    return countryBestThingCount('discipline', country);
 };
 
 /*
@@ -97,7 +110,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-
+    return countryBestThingCount('sport', country);
 };
 
 /*
@@ -106,7 +119,7 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestEvent = country => {
-
+    return countryBestThingCount('event', country);
 };
 
 /*
