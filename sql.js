@@ -7,10 +7,10 @@ Returns a SQL query string that will create the Country table with four columns:
 
 const createCountryTable = () => {
     return `CREATE TABLE Country (
-        name TEXT NOT NULL,
-        code TEXT NOT NULL,
-        gdp INTEGER,
-        population INTEGER);`;
+            name TEXT NOT NULL,
+            code TEXT NOT NULL,
+            gdp INTEGER,
+            population INTEGER);`;
 };
 
 /*
@@ -19,16 +19,16 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 
 const createGoldMedalTable = () => {
     return `CREATE TABLE GoldMedal (
-        id INTEGER PRIMARY KEY,
-        year INTEGER NOT NULL,
-        city TEXT NOT NULL,
-        season TEXT NOT NULL,
-        name TEXT NOT NULL,
-        country TEXT NOT NULL,
-        gender TEXT NOT NULL,
-        sport TEXT NOT NULL,
-        discipline TEXT NOT NULL,
-        event TEXT NOT NULL);`;
+            id INTEGER PRIMARY KEY,
+            year INTEGER NOT NULL,
+            city TEXT NOT NULL,
+            season TEXT NOT NULL,
+            name TEXT NOT NULL,
+            country TEXT NOT NULL,
+            gender TEXT NOT NULL,
+            sport TEXT NOT NULL,
+            discipline TEXT NOT NULL,
+            event TEXT NOT NULL);`;
 };
 
 /*
@@ -37,8 +37,22 @@ Returns a SQL query string that will find the number of gold medals for the give
 
 const goldMedalNumber = country => {
     return `SELECT COUNT(*) AS count
-        FROM GoldMedal 
-        WHERE country = '${country}';`;
+            FROM GoldMedal 
+            WHERE country = '${country}';`;
+};
+
+// Utility function to find year argument country won the most medals by season
+const mostSeasonWins = (season, country) => {
+    if (['Summer', 'Winter'].includes(season)) {
+        return `SELECT year, COUNT(*) AS count
+                FROM GoldMedal
+                WHERE country = '${country}' AND
+                season = '${season}'
+                GROUP BY year
+                ORDER BY COUNT(*) DESC
+                LIMIT 1;`;
+    }
+    return null;
 };
 
 /*
@@ -47,7 +61,7 @@ won the most summer medals, along with the number of medals aliased to 'count'.
 */
 
 const mostSummerWins = country => {
-
+    return mostSeasonWins('Summer', country);
 };
 
 /*
@@ -56,7 +70,7 @@ won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
 const mostWinterWins = country => {
-
+    return mostSeasonWins('Winter', country);
 };
 
 /*
