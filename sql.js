@@ -189,7 +189,22 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 */
 
 const orderedSports = (country, field, sortAscending) => {
-
+    let orderingString = '';
+    if (field) {
+        if (sortAscending) {
+            orderingString = `ORDER BY ${field} ASC`;
+        } else {
+            orderingString = `ORDER BY ${field} DSC`;
+        }
+    }
+    return `SELECT sport, 
+                COUNT(sport) AS count
+                    (COUNT(sport) * 100 / (SELECT COUNT(*)
+                                           FROM GoldMedal
+                                           WHERE country = '${country}')) AS percent
+            FROM GoldMedal
+            WHERE country = '${country}'
+            GROUP BY sport ${orderingString};`;
 };
 
 module.exports = {
