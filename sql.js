@@ -79,7 +79,7 @@ const countryBestThingCount = (bestThing, country) => {
         return `SELECT ${bestThing}, COUNT(*) AS count
                 FROM GoldMedal
                 WHERE country = '${country}'
-                GROUP BY year
+                GROUP BY ${bestThing}
                 ORDER BY COUNT(*) DESC
                 LIMIT 1;`;
     }
@@ -125,10 +125,10 @@ const bestEvent = country => {
 // Utility function to find number of medalists in argument country by gender
 const countryGenderMedalistsCount = (gender, country) => {
     if (['Men', 'Women'].includes(gender)) {
-        return `SELECT COUNT( DISTINCT name)
+        return `SELECT COUNT(DISTINCT name)
                 FROM GoldMedal
-                WHERE gender = '${gender} AND
-                    country = '${country}';`;
+                WHERE country = '${country}' AND
+                    gender = '${gender}';`;
     }
     return null;
 };
@@ -173,7 +173,7 @@ const orderedMedals = (country, field, sortAscending) => {
         if (sortAscending) {
             orderingString = `ORDER BY ${field} ASC`;
         } else {
-            orderingString = `ORDER BY ${field} DSC`;
+            orderingString = `ORDER BY ${field} DESC`;
         }
     }
     return `SELECT *
@@ -194,11 +194,11 @@ const orderedSports = (country, field, sortAscending) => {
         if (sortAscending) {
             orderingString = `ORDER BY ${field} ASC`;
         } else {
-            orderingString = `ORDER BY ${field} DSC`;
+            orderingString = `ORDER BY ${field} DESC`;
         }
     }
     return `SELECT sport, 
-                COUNT(sport) AS count
+                COUNT(sport) AS count,
                     (COUNT(sport) * 100 / (SELECT COUNT(*)
                                            FROM GoldMedal
                                            WHERE country = '${country}')) AS percent
